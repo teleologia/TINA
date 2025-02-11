@@ -25,5 +25,11 @@ EXPOSE 8000
 ENV NVIDIA_VISIBLE_DEVICES=all
 ENV NVIDIA_DRIVER_CAPABILITIES=compute,utility
 
+ARG API_KEY
+ARG API_KEY_NAME
+
+ENV API_KEY=${API_KEY}
+ENV API_KEY_NAME=${API_KEY_NAME}
+
 # Start de app binnen de virtuele omgeving
 CMD ["sh", "-c", ". venv/bin/activate && uvicorn app.main:app --host 0.0.0.0 --port 8000"]

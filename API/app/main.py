@@ -9,17 +9,20 @@ from fastapi.security.api_key import APIKeyHeader, APIKey
 from starlette.status import HTTP_403_FORBIDDEN  
   
 from helpers.audio_utils import convert_to_supported_format, split_audio_file  
-from models.model_utils import load_model, transcribe, transcribe_with_timestamps  
-import os  
-  
+from models.model_utils import load_model, transcribe, transcribe_with_timestamps
+from dotenv import load_dotenv
+import os
+
 # Laad het model bij het starten van de app  
 model, processor, asr_pipeline = load_model()  
   
-app = FastAPI()  
+app = FastAPI()
+
+load_dotenv()
   
 # Vervang 'JOUW_VEILIGE_API_SLEUTEL' door je eigen API-sleutel  
-API_KEY = "JOUW_VEILIGE_API_SLEUTEL"  
-API_KEY_NAME = "access_token"  
+API_KEY = os.getenv('API_KEY')
+API_KEY_NAME = os.getenv("API_KEY_NAME")
   
 api_key_header = APIKeyHeader(name=API_KEY_NAME, auto_error=False)  
   
