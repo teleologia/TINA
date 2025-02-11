@@ -1,5 +1,5 @@
 # Gebruik de officiële NVIDIA PyTorch-afbeelding met CUDA-ondersteuning
-FROM nvidia/cuda:12.6.0-cudnn-runtime-ubuntu24.04
+FROM nvidia/cuda:12.4.0-runtime-ubuntu22.04
 
 # Installeer Python 3, venv, ffmpeg en andere dependencies
 RUN apt-get update && apt-get install -y python3 python3-venv ffmpeg libsndfile1
@@ -12,7 +12,7 @@ RUN python3 -m venv venv
 
 # Activeer de virtuele omgeving en installeer Python-dependencies
 COPY requirements.txt .
-RUN . venv/bin/activate && pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126
+RUN . venv/bin/activate && pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
 RUN . venv/bin/activate && pip install --upgrade pip && pip install -r requirements.txt
 
 # Kopieer de applicatiecode
